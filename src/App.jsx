@@ -100,7 +100,7 @@ function App() {
 
   return (
     <main>
-      <div className="pattern" style={{ backgroundImage: "url('/hero-bg.png')" }}/>
+      <div className="pattern" style={{ backgroundImage: "url('hero-bg.png')" }}/>
         
       <div className="wrapper">
 
