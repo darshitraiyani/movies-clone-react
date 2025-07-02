@@ -99,7 +99,7 @@ function App() {
 
   return (
     <main>
-      <div className="pattern" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}hero-bg.png)`}}/>
+      <div className="pattern" style={{ backgroundImage: `url(${window.location.pathname}hero-bg.png)`}}/>
       {/* <div className="pattern"/> */}
         
       <div className="wrapper">
