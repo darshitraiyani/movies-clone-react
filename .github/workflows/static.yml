@@ -26,11 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Fix absolute paths in HTML to relative
-        run: |
-          sed -i 's|/logo.png|logo.png|g' dist/index.html
-        #  sed -i 's|/assets/|assets/|g' dist/index.html
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
