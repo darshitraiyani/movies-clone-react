@@ -26,6 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Copy static assets to dist/assets
+        run: mkdir -p dist/assets && cp -r dist/assets/* dist/assets/
+
       - name: Fix absolute paths in HTML to relative
         run: |
           sed -i 's|/logo.png|logo.png|g' dist/index.html
