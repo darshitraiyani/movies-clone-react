@@ -3,9 +3,9 @@
 
 @import 'tailwindcss';
 
-:root {
+/* :root {
   --background-image-hero-pattern: url('/hero-bg.png');
-}
+} */
 
 @theme {
   --color-primary: #030014;
@@ -21,7 +21,7 @@
 
   --breakpoint-xs: 480px;
 
-  /* --background-image-hero-pattern: url('hero-bg.png'); */
+  /* --background-image-hero-pattern: url('/hero-bg.png'); */
 }
 
 @layer base {
@@ -54,7 +54,7 @@
 
 @layer components {
   .pattern {
-    background-image: var(--background-image-hero-pattern);
+    /* background-image: var(--background-image-hero-pattern); */
     /* @apply bg-hero-pattern w-screen h-screen bg-center bg-cover absolute z-0; */
     @apply w-screen h-screen bg-center bg-cover absolute z-0;
   }
