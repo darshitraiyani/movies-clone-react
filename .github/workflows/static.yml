@@ -30,7 +30,6 @@ jobs:
         run: |
           sed -i 's|/logo.png|logo.png|g' dist/index.html
           sed -i 's|/assets/|assets/|g' dist/index.html
-          sed -i 's|/assets/|assets/|g' dist/index.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
