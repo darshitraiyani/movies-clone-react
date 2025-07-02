@@ -4,6 +4,7 @@ import MovieCard from "./components/MovieCard.jsx";
 import { useState,useEffect } from "react";
 import { useDebounce } from "react-use";
 import { getTrendingMoives, updateSearchCount } from "./appwrite.js";
+import Pagination from "./components/Pagination.jsx";
 // import heroBg from './assets/hero-bg.png'
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
@@ -36,6 +37,14 @@ function App() {
 
   const [debouncedSearchTerm,setDebouncedSearchTerm] = useState('');
 
+  const [currentPage,setCurrentPage] = useState(1);
+
+  const [itemsPerPage,setItemsPerPage] = useState(0);
+
+  const [totalPages,setTotalPages] = useState(0);
+
+  const [totalResults,setTotalResults] = useState(0);
+
   useDebounce(() => setDebouncedSearchTerm(searchTerm),500,[searchTerm]);
 
   const fetchMovies = async (query = '') => {
@@ -44,8 +53,8 @@ function App() {
     setErrorMessage(null);
     try {
       const endpoint = query 
-      ? `${API_BASE_URL}/search/movie?query=${encodeURI(query)}`
-      : `${API_BASE_URL}/discover/movie?include_adult=false&language=en-US&sort_by=popularity.desc`;
+      ? `${API_BASE_URL}/search/movie?query=${encodeURI(query)}&page=${currentPage}`
+      : `${API_BASE_URL}/discover/movie?include_adult=false&language=en-US&sort_by=popularity.desc&page=${currentPage}`;
 
       const response = await fetch(endpoint,API_OPTIONS);
 
@@ -62,6 +71,10 @@ function App() {
       }
 
       setMovieList(data.results || []);
+      setCurrentPage(data.page || 1);
+      setItemsPerPage(data.results.length || 0);
+      setTotalPages(data.total_pages || 0);
+      setTotalResults(data.total_results || 0);
 
       if (query && data.results.length > 0) {
         await updateSearchCount(query,data.results[0]);
@@ -90,9 +103,17 @@ function App() {
     }
   };
 
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const onSearchTermChange = (value) => {
+    setCurrentPage(value);
+  };
+
   useEffect(() => {
     fetchMovies(debouncedSearchTerm);
-  },[debouncedSearchTerm]);
+  },[debouncedSearchTerm,currentPage]);
 
   useEffect(() => {
     loadTrendingMovies();
@@ -111,7 +132,7 @@ function App() {
 
           <h1>Find <span className="text-gradient">Movies</span> You'll Enjoy Without the Hassle</h1>
 
-          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearchTermChange={onSearchTermChange}/>
 
         </header>
 
@@ -155,6 +176,10 @@ function App() {
             </ul>
             : <h5 className="text-white">No Data Found.</h5>
           )}
+        </section>
+
+        <section className="mt-4">
+          <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} totalPages={totalPages} totalResults={totalResults} onPageChange={onPageChange}/>
         </section>
 
       </div>

@@ -1,5 +1,9 @@
-export default function Search({searchTerm,setSearchTerm}) {
+export default function Search({searchTerm,setSearchTerm,onSearchTermChange}) {
 
+    function handleInputChange(event) {
+        setSearchTerm(event.target.value);
+        onSearchTermChange(1);//Change Page Value To 1
+    }
     return (
         <div className="search">
             <div>
@@ -9,7 +13,7 @@ export default function Search({searchTerm,setSearchTerm}) {
                     type="text"
                     placeholder="Search through thousands of movies"
                     value={searchTerm}
-                    onChange={(event) => setSearchTerm(event.target.value)}
+                    onChange={handleInputChange}
                 />
             </div>
         </div>
