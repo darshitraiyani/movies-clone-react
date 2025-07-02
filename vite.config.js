@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: '/movies-clone-react/'
+  base: '/movies-clone-react/'//git hub repo name for github pages
 })
