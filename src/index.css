@@ -3,10 +3,6 @@
 
 @import 'tailwindcss';
 
-/* :root {
-  --background-image-hero-pattern: url('/hero-bg.png');
-} */
-
 @theme {
   --color-primary: #030014;
 
