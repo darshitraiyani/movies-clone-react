@@ -4,7 +4,6 @@ import MovieCard from "./components/MovieCard.jsx";
 import { useState,useEffect } from "react";
 import { useDebounce } from "react-use";
 import { getTrendingMoives, updateSearchCount } from "./appwrite.js";
-import heroBg from './assets/hero-bg.png';
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -100,7 +99,7 @@ function App() {
 
   return (
     <main>
-      <div className="pattern" style={{ backgroundImage: `url(${heroBg})` }}/>
+      <div className="pattern" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}hero-bg.png)`}}/>
       {/* <div className="pattern"/> */}
         
       <div className="wrapper">
